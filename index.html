@@ -4,25 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/nav.js" defer></script>
+    <script src="js/subtitle.js" defer></script>
+    <script src="js/gamemodal.js" defer></script>
+    <script src="js/hamburguer.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <title>Hugo Fiuza</title>
 </head>
 
 <body>
-    <header>
-        <div class="navbar">
-        <h1>Hugo Fiuza</h1>
-        <h4>Full-Stack Developer</h4>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 sidebar position-fixed p-4">
+                <img src="img/sideline.svg" alt="" class="sidebar-line">
+                <div class="d-flex flex-column align-items-start">
+                    <div class="mobile-header d-flex justify-content-between w-100 align-items-center">
+                        <h1 class="mb-1">Hugo Fiuza</h1>
+                        <button class="hamburger d-md-none" onclick="toggleMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <h4 class="subtitle mb-5" id="subtitle" data-text="Full-Stack Developer"></h4>
 
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="sobre.html">My Work</a></li>
-                <li><a href="contato.html">Group Work</a></li>
-            </ul>
-        </nav>
+                    <nav class="nav flex-column w-100" id="mainNav">
+                        <a class="nav-link" href="#home" data-text="Home">
+                            <img class="nav-underline" src="img/underlinenavselection.svg" alt="">
+                        </a>
+                        <a class="nav-link" href="#work" data-text="My Work">
+                            <img class="nav-underline" src="img/underlinenavselection.svg" alt="">
+                        </a>
+                        <a class="nav-link" href="#group" data-text="Group Work">
+                            <img class="nav-underline" src="img/underlinenavselection.svg" alt="">
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-9 offset-md-3 content-section">
+                <div id="home" class="content active">
+                    <h2>Home</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="home-text-top code-block">
+                                let <span class="code-variable">person</span> <span class="code-operator">=</span> <span class="code-bracket">{</span> <br>
+                                <span class="code-property">dateofbirth:</span> <span class="code-value">"27/06/1996"</span>, <br>
+                                <span class="code-property">title:</span> <span class="code-value">"Full-Stack Developer"</span>, <br>
+                                <span class="code-property">languages:</span> <span class="code-array-bracket">[</span> <br>
+                                <span class="code-array-item">"C#"</span>, <br>
+                                <span class="code-array-item">"JavaScript"</span>, <br>
+                                <span class="code-array-item">"HTML"</span>, <br>
+                                <span class="code-array-item">"CSS"</span>, <br>
+                                <span class="code-array-item">"React"</span> <br>
+                                <span class="code-array-bracket">]</span>, <br>
+                                <span class="code-bracket">}</span>; <br>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 home-text-top">
+                            <img src="img/blksea.avif" alt="Placeholder" class="hero-image">
+                        </div>
+
+                        <div class="col-md-10 home-text-bottom code-block">
+                            const <span class="code-variable">text</span> <span class="code-operator">=</span> 
+                            <span class="code-value">"I am a dedicated and ambitious individual, constantly seeking new challenges and opportunities for growth. With a strong foundation in both front-end and back-end development, I bring creativity and technical expertise to every project. My passion for clean code and user-centric design drives me to create efficient, scalable solutions that make a real impact."</span><span class="code-operator">;</span> <br>
+                            <span class="code-variable">document</span><span class="code-function">.</span><span class="code-function">getElementById</span><span class="code-function">(</span><span class="code-string">"textContainer"</span><span class="code-function">)</span><span class="code-function">.</span><span class="code-variable">textContent</span> <span class="code-variable">=</span> <span class="code-variable">text;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="work" class="content">
+                    <h2>My Work</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card-container cursor-pointer" onclick="openGameModal('http://193.137.7.33/~aluno17901/trabalhos/T01_Build_Web_v3/', 'Unity Project', 'A promotional animated banner crafted in Unity, showcasing a charming vintage book library. This university project combines classic aesthetics with modern animation techniques.')">
+                                <div class="card">
+                                    <div class="card-front">
+                                        <img src="img/unityt01.png" alt="Project 1" class="img-fluid">
+                                    </div>
+                                    <div class="card-back">
+                                        <h4>Unity Project</h4>
+                                        <p>A promotional animated banner crafted in Unity, showcasing a charming vintage book library. This university project combines classic aesthetics with modern animation techniques.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      
+                    </div>
+                </div>
+
+                <div class="modal fade" id="gameModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header border-secondary">
+                                <h5 class="modal-title text-light"></h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="gameFrame" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+                                <div class="project-details mt-3">
+                                    <p class="project-description text-light">123132s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="group" class="content">
+                    <h2> Group Work </h2>
+
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

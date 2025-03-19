@@ -1,29 +1,205 @@
-html,
-body {
+/* Base Styles */
+html, body {
     background: #0D0D17;
     margin: 0;
     padding: 0;
     font-family: 'Rubik', sans-serif;
     color: #ECE5F0;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    line-height: 1.6;
 }
 
-h4 {
+/* Typography Scale */
+h1 { font-size: clamp(24px, 5vw, 36px); }
+h2 { font-size: clamp(48px, 8vw, 96px); }
+h4 { 
+    font-size: clamp(14px, 2vw, 16px);
     color: rgba(236, 229, 240, 0.60);
-    font-size: 16px;
 }
 
-h1 {
-    font-size: 36px;
+/* Layout Components */
+.sidebar {
+    background: rgba(0, 0, 0, 0.35);
+    height: 100vh;
+    width: min(268px, 100%);
+    position: fixed;
+    z-index: 100;
 }
 
+.sidebar-line {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+
+/* Navigation */
+.nav-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 2rem 0;
+    padding: 0.5rem 1rem;
+}
+
+/* Navigation Hover/Selection Effects */
 .nav-link::before {
-    color: #ECE5F0;
     content: attr(data-text);
+    color: #ECE5F0;
 }
 
+.nav-link:hover::before {
+    content: "!%&$";
+    animation: glitch 0.3s ease-in-out forwards;
+}
+
+/* Optional: adjust the first item's margin if needed */
+.nav-link:first-child {
+    margin-top: 1rem;
+}
+
+.nav-link.selected {
+    transform: scale(1.1);
+    font-weight: 600;
+    margin-left: 20px;
+    transition: all 0.1s ease-in-out;
+}
+
+.nav-underline {
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+    transform-origin: left;
+    margin-left: -20px;
+    margin-right: 60px;
+}
+
+.nav-link.selected .nav-underline {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Content Sections */
+.content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.content.active {
+    display: block;
+    opacity: 1;
+}
+
+.content.fade-out {
+    animation: fadeSlideOut 0.3s ease forwards;
+}
+
+.content.fade-in {
+    animation: fadeSlideIn 0.3s ease forwards;
+}
+
+#home,
+#work,
+#group {
+    margin-top: 20px;
+}
+
+/* Content Sections Spacing */
+.content h2 {
+    margin-bottom: 3rem;  /* Increase space between title and content */
+}
+
+/* Home Page Components */
+.home-text-top {
+    
+    color: rgba(35, 75, 139, 0.35);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.home-text-bottom {
+    margin-top: 100px;
+    color: rgba(35, 75, 139, 0.35);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Subtitle Animation */
+.subtitle {
+    position: relative;
+    white-space: nowrap;  /* Prevent line breaks */
+    margin-left: 38px;
+    min-width: 200px;     /* Ensure minimum width */
+}
+
+.subtitle::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(236, 229, 240, 0.60);
+    white-space: nowrap;  /* Prevent line breaks in the pseudo-element */
+}
+
+.subtitle.glitching::before {
+    animation: subtitleGlitch 0.3s ease-in-out forwards;
+}
+
+
+/* Increase opacity for better visibility */
+.code-variable {
+    color: rgba(128, 220, 247, 0.35);
+}
+
+.code-operator {
+    color: rgba(236, 229, 240, 0.35);
+}
+
+.code-bracket {
+    color: rgba(255, 211, 91, 0.35);
+    margin-left: 0;  /* Reset margin for closing brackets */
+}
+
+.code-property {
+    color: rgba(128, 220, 247, 0.65);
+    margin-left: 20px;
+}
+
+.code-value {
+    color: #FF6A00;
+    
+}
+
+.code-array-bracket {
+    color: rgba(218, 112, 214, 0.35);
+    margin-left: 20px;  /* Align with properties */
+}
+
+.code-array-item {
+    color: #FF6A00;
+    margin-left: 40px;
+}
+
+.code-function {
+    color: rgba(255, 215, 0, 0.35);
+}
+
+.code-string {
+    color: rgba(163, 80, 43, 0.35);
+}
+
+/* Images */
+.hero-image {
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+/* Animations */
 @keyframes glitch {
     0% {
         content: "!%&$?»";
@@ -50,60 +226,261 @@ h1 {
     }
 }
 
-.nav-link:hover::before {
-    color: #ECE5F0;
-    content: "!%&$";
-    animation: glitch 0.3s ease-in-out forwards;
+
+@keyframes subtitleGlitch {
+    0% {
+        content: "W%€ (&Velopment";
+        opacity: 0.7;
+    }
+
+    35% {
+        content: "UI/UX £@§€ign";
+        opacity: 0.9;
+    }
+
+    65% {
+        content: "F/&nt #?nd ?»ngin&€ring";
+        opacity: 0.95;
+    }
+
+    100% {
+        content: attr(data-text);
+        opacity: 1;
+    }
 }
 
+@keyframes fadeSlideOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
 
-.nav-link {
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-details {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.project-description {
+    color: rgba(236, 229, 240, 0.8);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.modal-xl .modal-body iframe {
+    width: 100%;
+    height: min(65vh, 600px);
+}
+
+/* Optional: Add responsive heights for different screen sizes */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        top: 0;
+    }
+
+    .content {
+        margin-top: 2rem;
+        padding: 1rem;
+    }
+
+    .content.active {
+        animation: fadeSlideIn 0.3s ease forwards;
+    }
+
+    .code-block {
+        padding-left: 20px;
+    }
+
+    .card-container {
+        max-width: 250px;
+    }
+
+    .home-text-top {
+        margin-top: 20px;
+    }
+
+    /* Center hamburger button */
+    .hamburger {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Adjust h2 position for mobile */
+    .content h2 {
+        margin-top: 120px;
+    }
+}
+
+.game-preview h3 {
+    text-align: center;
+    margin-top: 1rem;
+    color: rgba(236, 229, 240, 0.60);
+}
+
+.game-preview img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+/* Add these styles after your existing CSS */
+
+.card-container {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1;
+    perspective: 1000px;
+    margin: 1rem auto;
+}
+
+.card {
     position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-radius: 12px;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-back {
+    background: rgba(0, 0, 0, 0.9);
+    transform: rotateY(180deg);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.nav-underline {
-    opacity: 0;
-    transform: scaleX(0);
-    transition: all 0.3s ease;
-    transform-origin: left;
-    margin-left: -20px;
-    margin-right: 60px;
+.card-back h4 {
+    color: #ECE5F0;
+    margin-bottom: 15px;
 }
 
-.nav-link.selected .nav-underline {
-    opacity: 1;
-    transform: scaleX(1);
+.card-back p {
+    color: rgba(236, 229, 240, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .card-container:hover .card {
+        transform: rotateY(180deg);
+    }
+    .card-container:hover {
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 
-.nav-link.selected {
-    scale: 1.1;
-    font-weight: 600;
-    margin-left: 20px;
-    transition: all 0.1s ease-in-out;
+
+/* Project Cards Spacing */
+#work .row {
+    margin-left: 40px;  /* Match home section indentation */
+    margin-right: 40px;
 }
 
-.content {
+/* Hamburger Menu */
+.hamburger {
     display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
-.content.active {
+.hamburger span {
     display: block;
-    opacity: 1;
+    width: 25px;
+    height: 3px;
+    background: #ECE5F0;
+    margin: 5px 0;
+    transition: all 0.3s ease;
 }
 
-#home,
-#work,
-#group {
-    margin-top: 20px;
-}
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        z-index: 1000;
+    }
 
-.home-text-top {
-    color: rgba(35, 75, 139, 0.15);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    .sidebar {
+        padding: 1rem !important;
+    }
+
+    #mainNav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 1rem;
+    }
+
+    #mainNav.show {
+        display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .mobile-header {
+        width: 100%;
+        position: relative;
+        z-index: 1001;
+    }
 }
